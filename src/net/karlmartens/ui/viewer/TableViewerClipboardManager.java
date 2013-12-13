@@ -33,7 +33,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import net.karlmartens.platform.util.Pair;
+import net.karlmartens.platform.function.Pair;
 import net.karlmartens.ui.Activator;
 import net.karlmartens.ui.Messages;
 import net.karlmartens.ui.UiUtil;

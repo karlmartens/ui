@@ -19,7 +19,7 @@ package net.karlmartens.ui.action;
 
 import java.util.Set;
 
-import net.karlmartens.platform.util.Filter;
+import net.karlmartens.platform.function.Function;
 import net.karlmartens.ui.widget.TableColumn;
 import net.karlmartens.ui.widget.TableItem;
 
@@ -51,9 +51,9 @@ public final class FilterColumnValueAction extends Action {
       _accepted.add(text);
     }
 
-    _column.setFilter(new Filter<TableItem>() {
+    _column.setFilter(new Function<TableItem,Boolean>() {
       @Override
-      public boolean accepts(TableItem candidate) {
+      public Boolean apply(TableItem candidate) {
         if (_accepted.isEmpty())
           return true;
 

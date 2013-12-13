@@ -21,8 +21,9 @@ import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Comparator;
 
+import net.karlmartens.platform.function.Criteria;
+import net.karlmartens.platform.function.Function;
 import net.karlmartens.platform.util.ArraySupport;
-import net.karlmartens.platform.util.Filter;
 import net.karlmartens.platform.util.NullSafe;
 import net.karlmartens.platform.util.NumberStringComparator;
 import net.karlmartens.ui.Images;
@@ -846,18 +847,18 @@ public final class Table extends Composite {
   }
 
   void updateFilteredItems() {
-    Filter<TableItem> filter = Filter.all();
+    Function<TableItem, Boolean> filter = Criteria.all();
     for (int i = 0; i < _columnCount; i++) {
-      final Filter<TableItem> oFilter = _columns[i].getFilter();
+      final Function<TableItem,Boolean> oFilter = _columns[i].getFilter();
       if (oFilter == null)
         continue;
 
-      filter = filter.and(oFilter);
+      filter = Criteria.and(filter, oFilter);
     }
 
     for (int i = 0; i < _itemCount; i++) {
       final TableItem item = _items[i];
-      item.setVisible(i < getFixedRowCount() || filter.accepts(item));
+      item.setVisible(i < getFixedRowCount() || filter.apply(item));
     }
     redraw();
   }

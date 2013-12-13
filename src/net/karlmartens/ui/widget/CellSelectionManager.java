@@ -19,7 +19,7 @@ package net.karlmartens.ui.widget;
 
 import java.util.Arrays;
 
-import net.karlmartens.platform.datatable.util.function._F1;
+import net.karlmartens.platform.function.Function;
 import net.karlmartens.platform.util.ArraySupport;
 import net.karlmartens.platform.util.NullSafe;
 
@@ -117,7 +117,7 @@ public final class CellSelectionManager {
           _table.getFixedHeaderColumnCount(), _table.getFixedHeaderRowCount()
               - _table.getFixedHeaderRowCount(), _table.getColumnCount(),
           _table.getItemCount() - _table.getFixedHeaderColumnCount());
-      final _F1<Point, Boolean> validCellTest = new _F1<Point, Boolean>() {
+      final Function<Point, Boolean> validCellTest = new Function<Point, Boolean>() {
         public Boolean apply(Point pt) {
           return tableBounds.contains(pt);
         }
@@ -131,7 +131,7 @@ public final class CellSelectionManager {
         _focusCell = null;
         _expansionCell = null;
         _selections = ArraySupport.filter(originalSelections,
-            new _F1<Point, Boolean>() {
+            new Function<Point, Boolean>() {
               @Override
               public Boolean apply(Point pt) {
                 return !originalFocus.contains(pt);

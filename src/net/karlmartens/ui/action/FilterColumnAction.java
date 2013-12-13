@@ -17,7 +17,8 @@
  */
 package net.karlmartens.ui.action;
 
-import net.karlmartens.platform.util.Filter;
+import net.karlmartens.platform.function.Criteria;
+import net.karlmartens.platform.function.Function;
 import net.karlmartens.ui.widget.TableColumn;
 import net.karlmartens.ui.widget.TableItem;
 
@@ -30,10 +31,10 @@ import org.eclipse.jface.action.Action;
 public final class FilterColumnAction extends Action {
 
   private final TableColumn _column;
-  private final Filter<TableItem> _filter;
+  private final Function<TableItem, Boolean> _filter;
 
   public FilterColumnAction(TableColumn column, String text,
-      Filter<TableItem> filter) {
+      Function<TableItem, Boolean> filter) {
     _column = column;
     _filter = filter;
     setText(text);
@@ -42,7 +43,7 @@ public final class FilterColumnAction extends Action {
 
   @Override
   public void run() {
-    if (Filter.<TableItem> all() == _filter
+    if (Criteria.ALL.equals(_filter)
         || _filter.equals(_column.getFilter())) {
       _column.setFilter(null);
       return;

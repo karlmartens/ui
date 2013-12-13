@@ -25,7 +25,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import net.karlmartens.platform.util.Filter;
+import net.karlmartens.platform.function.Criteria;
 import net.karlmartens.platform.util.NumberStringComparator;
 import net.karlmartens.ui.Images;
 import net.karlmartens.ui.Messages;
@@ -87,7 +87,7 @@ final class FilterGroupContribution extends CompoundContributionItem {
     menu.removeAll();
 
     final IAction allAction = new FilterColumnAction(column, _allText,
-        Filter.<TableItem> all());
+        Criteria.<TableItem>all());
     menu.add(new ActionContributionItem(allAction));
 
     final TableItem[] items = _table.getItems();
@@ -97,7 +97,7 @@ final class FilterGroupContribution extends CompoundContributionItem {
     final int to = from + Math.min(10, items.length);
     final TableItem[] topTen = Arrays.copyOfRange(items, from, to);
     final IAction topTenFilter = new FilterColumnAction(column, _topTextText,
-        Filter.accepting(topTen));
+        Criteria.accepting(topTen));
     menu.add(new ActionContributionItem(topTenFilter));
 
     menu.add(new Separator());

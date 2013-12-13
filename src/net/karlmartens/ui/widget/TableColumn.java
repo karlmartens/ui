@@ -17,7 +17,7 @@
  */
 package net.karlmartens.ui.widget;
 
-import net.karlmartens.platform.util.Filter;
+import net.karlmartens.platform.function.Function;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlListener;
@@ -35,7 +35,7 @@ public final class TableColumn extends Item {
   private boolean _hideable = true;
   private boolean _visible = true;
   private boolean _filterable = true;
-  private Filter<TableItem> _filter;
+  private Function<TableItem, Boolean> _filter;
 
   /**
    * <p>
@@ -143,12 +143,12 @@ public final class TableColumn extends Item {
     return _filterable;
   }
 
-  public void setFilter(Filter<TableItem> filter) {
+  public void setFilter(Function<TableItem, Boolean> filter) {
     _filter = filter;
     _parent.updateFilteredItems();
   }
 
-  public Filter<TableItem> getFilter() {
+  public Function<TableItem, Boolean> getFilter() {
     if (isHeaderColumn())
       return null;
 
